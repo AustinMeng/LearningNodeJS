@@ -51,11 +51,19 @@ console.log(p.name);
 var p1 = new Person(12, 'Meng');
 console.log("p.shareV:" + p.shareV + " p.__proto__.shareV:" + p.__proto__.shareV + " p1.shareV:" + p1.shareV + " p1.__proto__.shareV:" + p1.__proto__.shareV);
 
+
+var p1 = new Person(12, 'Meng');
+console.log("p.shareV:" + p.shareV + " p.__proto__.shareV:" + p.__proto__.shareV + " p1.shareV:" + p1.shareV + " p1.__proto__.shareV:" + p1.__proto__.shareV);
+
 var asian = new Asian();
 console.log("instance field can not be inherited by subclass");
 console.log(asian.name);
 
 console.log("prototype field can be inherited by subclass");
+console.log(asian.shareV);
+
+console.log("prototype primitive type of field won't impact each other objects and their parent, the sub object should copy the value to its own method stack");
+asian.shareV = 3
 console.log(asian.shareV);
 
 console.log("prototype primitive type of field won't impact each other objects and their parent, the sub object should copy the value to its own method stack");
