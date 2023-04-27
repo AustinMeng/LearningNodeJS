@@ -7,13 +7,9 @@ function Person(age, name) {
     this.age = age;
     this.name = name;
     this.shareV = age;//every object has its own local shareV, won't impact each other, it is the basics to implement inheritance by protoType
-    this.shareV = age;//every object has its own local shareV, won't impact each other, it is the basics to implement inheritance by protoType
 }
 Person.prototype.shareV = 1;
 Person.prototype.ShareR = new Reference(88);
-Person.prototype.shareMethod = function () {
-    console.log("shareMethod" + " " + this.shareV);
-};
 Person.prototype.shareMethod = function () {
     console.log("shareMethod" + " " + this.shareV);
 };
@@ -22,12 +18,8 @@ Person.prototype.shareMethod = function () {
 function Asian() {
     this.showValue = function () {
         console.log(this.shareV);
-    this.showValue = function () {
-        console.log(this.shareV);
     }
 }
-//Below two declare ways both work, but the next one avoid unecessary object created and if use first way, it still get sharedV from Asian.protoType and if no then from Asian.protoType.__proto__
-//Asian.prototype = new Person();
 //Below two declare ways both work, but the next one avoid unecessary object created and if use first way, it still get sharedV from Asian.protoType and if no then from Asian.protoType.__proto__
 //Asian.prototype = new Person();
 Asian.prototype.__proto__ = Person.prototype;
@@ -38,17 +30,9 @@ function AsianWithLocalR() {
     this.ShareR = new Reference(100);
     this.showValue = function () {
         console.log(this.shareV);
-    this.showValue = function () {
-        console.log(this.shareV);
     }
 }
 AsianWithLocalR.prototype = new Person();
-//AsianWithLocalR.prototype.__proto__ = Person.prototype;
-
-//Note: User below principle to understand above
-//protoType belong to Function, it will be created when Funtion is created.
-//__proto__ belong to object, when properties can not be found in the object, it wil find it in its __proto__
-
 //AsianWithLocalR.prototype.__proto__ = Person.prototype;
 
 //Note: User below principle to understand above
