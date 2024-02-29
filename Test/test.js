@@ -13,10 +13,14 @@ let tmp = fn(1);
 tmp.then((value) => {
   console.log("------------Then run------------");
   console.log(`value=${value}`);
-  console.log("------------Then run------------");
 });
 
-function fn(str) {
+// p.then((value) => {
+//   console.log("------------Then run------------");
+//   console.log(`value=${value}`);
+// });
+
+function fn1(str) {
   //str = '你好，anni'
   let p = new Promise(function (resolve, reject) {
     let flag = true;
@@ -33,16 +37,17 @@ function fn(str) {
   return p;
 }
 
-tmp = fn("你好，anni");
+tmp = fn1("你好，anni");
 tmp
   .then((data) => {
     //data = '你好，anni'
+    console.log("---------------------------");
     console.log(data); //data = "你好，tony"
-    return fn("你好，tony");
+    return fn1("你好，tony");
   })
   .then((data) => {
     console.log(data); //data = '你好，linda'
-    return fn("你好，linda");
+    return fn1("你好，linda");
   })
   .then((data) => {
     console.log(data);
@@ -53,13 +58,29 @@ tmp
 
 async function test() {
   try {
-    let s1 = await fn("你好，anni");
-    let s2 = await fn("你好，tony");
-    let s3 = await fn("你好，linda");
+    let s1 = await fn1("你好，anni");
+    let s2 = await fn1("你好，tony");
+    let s3 = await fn1("你好，linda");
+    console.log("----------------------------");
     console.log(s1, s2, s3);
   } catch (error) {
     console.log(error);
   }
 }
 
-test();
+console.log("---------start-----------");
+test(); //到这里tmp和test异步请求都已经被发出
+
+/**
+ * Output:
+---------start-----------
+Promise run
+------------Then run------------
+value=1
+---------------------------
+你好，anni
+你好，tony
+你好，linda
+----------------------------
+你好，anni 你好，tony 你好，linda
+ */
